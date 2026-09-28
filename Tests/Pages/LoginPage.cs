@@ -6,6 +6,7 @@ public class LoginPage
     private ILocator _username;
     private ILocator _password;
     private ILocator _loginButton;
+    private ILocator _errorMessage;
     
     public LoginPage(IPage page) 
     {
@@ -13,9 +14,10 @@ public class LoginPage
         _username = _page.Locator("#user-name");
         _password = _page.Locator("#password");
         _loginButton = _page.Locator("#login-button");
-
+        _errorMessage = _page.Locator("[data-test=\"error\"]");
     }
 
+    public ILocator ErrorMessage => _errorMessage;
     public async Task GotoLogin()
     {
         await _page.GotoAsync("https://www.saucedemo.com");
