@@ -22,7 +22,7 @@ public class CartTests : PageTest
 
     [Test]
 
-    public async Task seeCartUpdates()
+    public async Task SeeCartUpdates()
     {
         await _inventoryPage.AddToCartBackpack.ClickAsync();
         await Expect(_inventoryPage.ShoppingCartBadge).ToHaveTextAsync("1");          
