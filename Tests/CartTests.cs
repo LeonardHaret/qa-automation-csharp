@@ -1,5 +1,6 @@
 using Tests.Pages;
 using Microsoft.Playwright.NUnit;
+using NUnit.Framework.Constraints;
 namespace Tests;
 
 
@@ -30,11 +31,31 @@ public class CartTests : PageTest
     }
 
 
-[Test]
+    [Test]
     public async Task RemoveItemFromCart_UpdatesBadgeCount()
     {
        await _inventoryPage.AddToCartBackpack.ClickAsync();
        await _inventoryPage.RemoveFromCartBackpack.ClickAsync();
        await Expect(_inventoryPage.ShoppingCartBadge).ToBeHiddenAsync();
+    }
+
+    [Test]
+    public async Task Add2ItemsToCart_BadgeIncrements()
+    {
+        await _inventoryPage.AddToCartBackpack.ClickAsync();
+        await Expect(_inventoryPage.ShoppingCartBadge).ToHaveTextAsync("1");
+        await _inventoryPage.AddToCartBikeLight.ClickAsync();
+        await Expect(_inventoryPage.ShoppingCartBadge).ToHaveTextAsync("2");
+    }
+
+    [Test]
+    public async Task AddToCartButton_Toggle()
+    {
+        await Expect(_inventoryPage.AddToCartBackpack).ToHaveTextAsync("Add to cart");
+        await _inventoryPage.AddToCartBackpack.ClickAsync();
+        await Expect(_inventoryPage.AddToCartBackpack).ToBeHiddenAsync();
+        await Expect(_inventoryPage.RemoveFromCartBackpack).ToBeVisibleAsync();
+        await _inventoryPage.RemoveFromCartBackpack.ClickAsync();
+        await Expect(_inventoryPage.RemoveFromCartBackpack).ToBeHiddenAsync();
     }
 }

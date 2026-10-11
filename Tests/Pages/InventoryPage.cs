@@ -9,6 +9,7 @@ public class InventoryPage
     private ILocator _addToCartBackpack;
     private ILocator _shoppingCartBadge;
     private ILocator _removeFromCartBackpack;
+    private ILocator _addToCartBikeLight;
      public InventoryPage(IPage page)
     {
         _page = page;
@@ -17,7 +18,7 @@ public class InventoryPage
         _header = _page.Locator("[data-test = \"title\"]");
         _shoppingCartBadge = _page.Locator("[data-test = \"shopping-cart-badge\"]");
         _removeFromCartBackpack = _page.Locator("[data-test = \"remove-sauce-labs-backpack\"]");
-        
+        _addToCartBikeLight = _page.Locator("[data-test = \"add-to-cart-sauce-labs-bike-light\"]");
     }
     public IPage inventoryPage => _page;
     public string Url => _url;
@@ -25,5 +26,7 @@ public class InventoryPage
     public ILocator AddToCartBackpack => _addToCartBackpack;
     public ILocator ShoppingCartBadge => _shoppingCartBadge;
     public ILocator RemoveFromCartBackpack => _removeFromCartBackpack;
+    public ILocator AddToCartBikeLight => _addToCartBikeLight;
 }
 
+    
