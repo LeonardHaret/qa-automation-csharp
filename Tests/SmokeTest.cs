@@ -1,5 +1,5 @@
-using System.Dynamic;
 using Microsoft.Playwright.NUnit;
+namespace Tests;
 
 [TestFixture]
 public class SmokeTest:PageTest

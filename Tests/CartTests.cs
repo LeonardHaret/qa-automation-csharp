@@ -1,6 +1,7 @@
 using Tests.Pages;
 using Microsoft.Playwright.NUnit;
-using Microsoft.Playwright;
+namespace Tests;
+
 
 
 [TestFixture]
@@ -22,14 +23,18 @@ public class CartTests : PageTest
 
     [Test]
 
-    public async Task SeeCartUpdates()
+    public async Task AddItemToCart_UpdatesBadgeCount()
     {
         await _inventoryPage.AddToCartBackpack.ClickAsync();
         await Expect(_inventoryPage.ShoppingCartBadge).ToHaveTextAsync("1");          
-
     }
 
 
-
-
+[Test]
+    public async Task RemoveItemFromCart_UpdatesBadgeCount()
+    {
+       await _inventoryPage.AddToCartBackpack.ClickAsync();
+       await _inventoryPage.RemoveFromCartBackpack.ClickAsync();
+       await Expect(_inventoryPage.ShoppingCartBadge).ToBeHiddenAsync();
+    }
 }
